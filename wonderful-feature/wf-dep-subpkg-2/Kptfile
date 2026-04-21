@@ -1,8 +1,8 @@
 apiVersion: kpt.dev/v1
 kind: Kptfile
 metadata:
-  name: wonderful-feature
+  name: wonderful-feature-dep-subpkg-2
   annotations:
     config.kubernetes.io/local-config: "true"
 info:
-  description: This is wonderful-feature
+  description: This is wonderful-feature-dep-subpkg-2

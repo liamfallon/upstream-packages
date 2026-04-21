@@ -5,4 +5,4 @@ metadata:
   annotations:
     config.kubernetes.io/local-config: "true"
 data:
-  name: wonderful-feature
+  name: wonderful-feature-dep-subsubpkg-2-1

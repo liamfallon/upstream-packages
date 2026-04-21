@@ -5,4 +5,4 @@ metadata:
   annotations:
     config.kubernetes.io/local-config: "true"
 info:
-  description: This is a wonderful feature
+  description: This is wonderful-feature
