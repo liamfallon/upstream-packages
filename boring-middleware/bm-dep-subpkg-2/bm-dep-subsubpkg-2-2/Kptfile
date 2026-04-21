@@ -1,8 +1,8 @@
 apiVersion: kpt.dev/v1
 kind: Kptfile
 metadata:
-  name: wonderful-feature-dep-subsubpkg-2-2
+  name: boring-middleware-dep-subsubpkg-2-2
   annotations:
     config.kubernetes.io/local-config: "true"
 info:
-  description: This is wonderful-feature-dep-subsubpkg-2-2
+  description: This is boring-middleware-dep-subsubpkg-2-2

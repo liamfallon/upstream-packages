@@ -15,7 +15,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wonderful-feature-subdir-a
+  name: boring-middleware-subdir-a
 spec:
   replicas: 1
   selector:

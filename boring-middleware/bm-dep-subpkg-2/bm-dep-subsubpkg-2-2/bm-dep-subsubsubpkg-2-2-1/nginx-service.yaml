@@ -15,7 +15,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wonderful-feature-subsubsubpkg-2-2-1-svc
+  name: boring-middleware-subsubsubpkg-2-2-1-svc
   labels:
     app: nginx
 spec:

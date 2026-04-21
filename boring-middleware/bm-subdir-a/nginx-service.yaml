@@ -15,7 +15,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wonderful-feature-subdir-a-svc
+  name: boring-middleware-subdir-a-svc
   labels:
     app: nginx
 spec:
