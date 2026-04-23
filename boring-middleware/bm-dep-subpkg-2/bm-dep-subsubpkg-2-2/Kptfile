@@ -17,9 +17,9 @@ upstreamLock:
     repo: https://github.com/liamfallon/upstream-packages
     directory: /nginx-dir-named
     ref: nginx-dir-v1
-    commit: 890525793b737551e86f8bfddc103b461ce6b7e8
+    commit: 455cff2a4c144cefebe27fe6cd413d00376a4a4a
 info:
-  description: This is a nginx deployment for nginx-dir-named
+  description: This is a nginx deployment for bm-dep-subsubpkg-2-2
 pipeline:
   mutators:
     - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest

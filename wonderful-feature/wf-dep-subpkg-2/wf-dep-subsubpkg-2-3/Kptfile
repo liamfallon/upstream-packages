@@ -1,8 +1,26 @@
 apiVersion: kpt.dev/v1
 kind: Kptfile
 metadata:
-  name: wonderful-feature-dep-subsubpkg-2-3
+  name: wf-dep-subsubpkg-2-3
   annotations:
     config.kubernetes.io/local-config: "true"
+upstream:
+  type: git
+  git:
+    repo: https://github.com/liamfallon/upstream-packages
+    directory: /nginx-dir-named
+    ref: nginx-dir-v1
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/liamfallon/upstream-packages
+    directory: /nginx-dir-named
+    ref: nginx-dir-v1
+    commit: 455cff2a4c144cefebe27fe6cd413d00376a4a4a
 info:
-  description: This is wonderful-feature-dep-subsubpkg-2-3
+  description: This is a nginx deployment for wf-dep-subsubpkg-2-3
+pipeline:
+  mutators:
+    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      configPath: starlark-set-to-dir-name.yaml

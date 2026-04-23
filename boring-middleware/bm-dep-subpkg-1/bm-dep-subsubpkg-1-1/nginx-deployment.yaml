@@ -14,9 +14,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: /nginx-dir-named
-  name: nginx-dir-named
+  name: bm-dep-subsubpkg-1-1
   annotations:
-    internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|nginx-dir-named'
+    internal.kpt.dev/upstream-identifier: apps|Deployment|default|nginx-dir-named
 spec:
   replicas: 1
   selector:

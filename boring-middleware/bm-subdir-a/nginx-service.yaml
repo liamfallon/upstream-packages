@@ -14,7 +14,7 @@
 apiVersion: v1
 kind: Service
 metadata: # kpt-merge: /nginx-dir-named
-  name: nginx-dir-named
+  name: bm-subdir-a
   labels:
     app: nginx
   annotations:
