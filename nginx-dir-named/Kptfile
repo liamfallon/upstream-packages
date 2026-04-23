@@ -10,13 +10,3 @@ pipeline:
   mutators:
     - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
       configPath: starlark-set-to-dir-name.yaml
-status:
-  conditions:
-    - type: Rendered
-      status: "True"
-      reason: RenderSuccess
-  renderStatus:
-    mutationSteps:
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
-        stderr: nginx-dir-named
-        exitCode: 0
