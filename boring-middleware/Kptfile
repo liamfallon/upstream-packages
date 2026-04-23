@@ -5,4 +5,8 @@ metadata:
   annotations:
     config.kubernetes.io/local-config: "true"
 info:
-  description: This is boring-middleware
+  description: This is a nginx deployment for nginx-dir-named
+pipeline:
+  mutators:
+    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      configPath: starlark-set-to-dir-name.yaml

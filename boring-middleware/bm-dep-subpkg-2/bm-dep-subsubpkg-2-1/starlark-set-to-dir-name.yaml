@@ -1,0 +1,7 @@
+apiVersion: fn.kpt.dev/v1alpha1
+kind: StarlarkRun
+metadata: # kpt-merge: /starlark-check-dir
+  name: starlark-check-dir
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'fn.kpt.dev|StarlarkRun|default|starlark-check-dir'
+source: "load(\"krmfn.star\", \"krmfn\")\n\ndef get_package_dir(resources):\n  for r in resources:\n    if krmfn.match_gvk(r, \"kpt.dev/v1\", \"Kptfile\"):\n      return r[\"metadata\"][\"annotations\"][\"internal.config.kubernetes.io/package-path\"].rpartition(\"/\")[2]\n  \n  return {}\n\ndef set_package_name(resources, package_name):\n  for r in resources:\n    if krmfn.match_gvk(r, \"apps/v1\", \"Deployment\") or krmfn.match_gvk(r, \"v1\", \"Service\"):\n      r[\"metadata\"][\"name\"] = package_name\n\n    if krmfn.match_gvk(r, \"kpt.dev/v1\", \"Kptfile\"):\n      r[\"metadata\"][\"name\"] = package_name\n      r[\"info\"][\"description\"] = \"This is a nginx deployment for \" + package_name\n\n    if krmfn.match_gvk(r, \"v1\", \"ConfigMap\") and krmfn.match_name(r, \"kptfile.kpt.dev\"):\n      r[\"data\"][\"name\"] = package_name\n  return {}\n\npackage_dir = get_package_dir(ctx.resource_list[\"items\"])\n\nprint(\"setting package name to \" + package_dir)\n\nset_package_name(ctx.resource_list[\"items\"], package_dir)\n\nprint(\"package name has been set to \" + package_dir)"

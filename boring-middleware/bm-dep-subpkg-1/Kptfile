@@ -1,8 +1,26 @@
 apiVersion: kpt.dev/v1
 kind: Kptfile
 metadata:
-  name: boring-middleware-dep-subpkg-1
+  name: bm-dep-subpkg-1
   annotations:
     config.kubernetes.io/local-config: "true"
+upstream:
+  type: git
+  git:
+    repo: https://github.com/liamfallon/upstream-packages
+    directory: /nginx-dir-named
+    ref: nginx-dir-v1
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/liamfallon/upstream-packages
+    directory: /nginx-dir-named
+    ref: nginx-dir-v1
+    commit: 890525793b737551e86f8bfddc103b461ce6b7e8
 info:
-  description: This is boring-middleware-dep-subpkg-1
+  description: This is a nginx deployment for nginx-dir-named
+pipeline:
+  mutators:
+    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      configPath: starlark-set-to-dir-name.yaml
