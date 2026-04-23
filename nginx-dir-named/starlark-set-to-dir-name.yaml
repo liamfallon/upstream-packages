@@ -1,0 +1,34 @@
+apiVersion: fn.kpt.dev/v1alpha1
+kind: StarlarkRun
+metadata:
+  name: starlark-check-dir
+source: |-
+  load("krmfn.star", "krmfn")
+
+  def get_package_dir(resources):
+    for r in resources:
+      if krmfn.match_gvk(r, "kpt.dev/v1", "Kptfile"):
+        return r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"].rpartition("/")[2]
+    
+    return {}
+
+  def set_package_name(resources, package_name):
+    for r in resources:
+      if krmfn.match_gvk(r, "apps/v1", "Deployment") or krmfn.match_gvk(r, "v1", "Service"):
+        r["metadata"]["name"] = package_name
+
+      if krmfn.match_gvk(r, "kpt.dev/v1", "Kptfile"):
+        r["metadata"]["name"] = package_name
+        r["info"]["description"] = "This is a nginx deployment for " + package_name
+
+      if krmfn.match_gvk(r, "v1", "ConfigMap") and krmfn.match_name(r, "kptfile.kpt.dev"):
+        r["data"]["name"] = package_name
+    return {}
+
+  package_dir = get_package_dir(ctx.resource_list["items"])
+
+  print("setting package name to " + package_dir)
+
+  set_package_name(ctx.resource_list["items"], package_dir)
+
+  print("package name has been set to " + package_dir)
