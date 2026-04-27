@@ -19,7 +19,7 @@ rm boring-middleware/bm-subdir-b/Kptfile
 rm boring-middleware/bm-subdir-b/package-context.yaml
 rm boring-middleware/bm-subdir-b/starlark-set-to-dir-name.yaml
 
-yq -i 'del(.upstream, .upstreamLock, .status) | .metadata.annotations."kpt.dev/bfs-rendering" = "true"' boring-middleware/Kptfile
+yq -i 'del(.upstream, .upstreamLock, .status)' boring-middleware/Kptfile
 
 kpt fn render boring-middleware
 
@@ -45,7 +45,7 @@ rm wonderful-feature/wf-subdir-b/Kptfile
 rm wonderful-feature/wf-subdir-b/package-context.yaml
 rm wonderful-feature/wf-subdir-b/starlark-set-to-dir-name.yaml
 
-yq -i 'del(.upstream, .upstreamLock, .status) | .metadata.annotations."kpt.dev/bfs-rendering" = "true"' wonderful-feature/Kptfile
+yq -i 'del(.upstream, .upstreamLock, .status)' wonderful-feature/Kptfile
 
 kpt fn render wonderful-feature
 

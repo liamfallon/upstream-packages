@@ -18,7 +18,7 @@ source: |-
           return r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"].rpartition("/")[2]
         else:
           render_root_path = r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"] + "/"
-          return r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"].rpartition(render_root_path)[2]
+          return r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"].rpartition(render_root_path)[2].replace("/", "-")
     
     return {}
 
