@@ -13,7 +13,6 @@ source: |-
 
     for r in resources:
       if krmfn.match_gvk(r, "kpt.dev/v1", "Kptfile"):
-
         if not "internal.kpt.dev/render-root-path" in r["metadata"]["annotations"]:
           render_root_path = r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"]
           r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"] = render_root_path
@@ -39,6 +38,11 @@ source: |-
         r["data"]["name"] = package_name
     return {}
 
+  def clear_internal_anotations(resources):
+      if krmfn.match_gvk(r, "kpt.dev/v1", "Kptfile"):
+        if "internal.kpt.dev/render-root-path" in r["metadata"]["annotations"]:
+          r["metadata"]["annotations"].remove("internal.config.kubernetes.io/package-path"])
+
   package_dir = get_package_dir(ctx.resource_list["items"])
 
   print("setting package name to " + package_dir)
@@ -46,3 +50,5 @@ source: |-
   set_package_name(ctx.resource_list["items"], package_dir)
 
   print("package name has been set to " + package_dir)
+
+  clear_internal_annotations(ctx.resource_list["items"])

@@ -1,5 +1,7 @@
 #! /bin/bash
 
+rm -fr boring-middleware
+
 kpt pkg get https://github.com/liamfallon/upstream-packages/nginx-dir-named@nginx-dir-v1 boring-middleware
 kpt pkg get https://github.com/liamfallon/upstream-packages/nginx-dir-named@nginx-dir-v1 boring-middleware/bm-subdir-a
 kpt pkg get https://github.com/liamfallon/upstream-packages/nginx-dir-named@nginx-dir-v1 boring-middleware/bm-subdir-b
@@ -25,6 +27,8 @@ kpt fn render boring-middleware
 
 sed -i 's/boring-middleware/bm-subdir-a/g' boring-middleware/bm-subdir-a/*
 sed -i 's/boring-middleware/bm-subdir-b/g' boring-middleware/bm-subdir-b/*
+
+rm -fr wonderful-feature
 
 kpt pkg get https://github.com/liamfallon/upstream-packages/nginx-dir-named@nginx-dir-v1 wonderful-feature
 kpt pkg get https://github.com/liamfallon/upstream-packages/nginx-dir-named@nginx-dir-v1 wonderful-feature/wf-subdir-a
