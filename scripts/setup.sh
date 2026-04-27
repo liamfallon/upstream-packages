@@ -49,5 +49,5 @@ yq -i 'del(.upstream, .upstreamLock, .status) | .metadata.annotations."kpt.dev/b
 
 kpt fn render wonderful-feature
 
-sed -i 's/wonderful-feature/wf-subdir-a/g' wonderful-feature/wf-subdir-a/*
-sed -i 's/wonderful-feature/wf-subdir-b/g' wonderful-feature/wf-subdir-b/*
+sed -i 's/wonderful-feature/wf-subdir-a/g' wonderful-feature/wf-subdir-a/*.yaml
+sed -i 's/wonderful-feature/wf-subdir-b/g' wonderful-feature/wf-subdir-b/*.yaml
