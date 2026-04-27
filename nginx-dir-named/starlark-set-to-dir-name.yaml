@@ -13,12 +13,16 @@ source: |-
 
     for r in resources:
       if krmfn.match_gvk(r, "kpt.dev/v1", "Kptfile"):
+
         if not "internal.kpt.dev/render-root-path" in r["metadata"]["annotations"]:
-          r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"] = r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"]
-          return r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"].rpartition("/")[2]
+          render_root_path = r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"]
+          r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"] = render_root_path
+          print ("render_root_path=" + render_root_path)
+          return render_root_path.rpartition("/")[2]
         else:
-          render_root_path = r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"] + "/"
-          return r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"].rpartition(render_root_path)[2].replace("/", "-")
+          render_root_path = r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"]
+          print ("render_root_path=" + render_root_path)
+          return r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"].rpartition(render_root_path + "/")[2].replace("/", "-")
     
     return {}
 
