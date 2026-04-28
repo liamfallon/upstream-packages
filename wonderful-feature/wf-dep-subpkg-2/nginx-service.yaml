@@ -14,7 +14,7 @@
 apiVersion: v1
 kind: Service
 metadata: # kpt-merge: /nginx-dir-named
-  name: wf-dep-subpkg-2
+  name: wonderful-feature-slash-wf-dep-subpkg-2
   labels:
     app: nginx
   annotations:

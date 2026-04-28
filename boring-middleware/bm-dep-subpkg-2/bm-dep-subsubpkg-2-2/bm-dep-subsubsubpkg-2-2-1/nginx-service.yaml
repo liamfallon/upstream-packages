@@ -14,7 +14,7 @@
 apiVersion: v1
 kind: Service
 metadata: # kpt-merge: /nginx-dir-named
-  name: bm-dep-subsubsubpkg-2-2-1
+  name: boring-middleware-slash-bm-dep-subpkg-2-slash-bm-dep-subsubpkg-2-2-slash-bm-dep-subsubsubpkg-2-2-1
   labels:
     app: nginx
   annotations:

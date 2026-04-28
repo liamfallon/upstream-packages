@@ -14,7 +14,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: /nginx-dir-named
-  name: wf-dep-subsubpkg-2-1
+  name: wonderful-feature-slash-wf-dep-subpkg-2-slash-wf-dep-subsubpkg-2-1
   annotations:
     internal.kpt.dev/upstream-identifier: apps|Deployment|default|nginx-dir-named
 spec:
