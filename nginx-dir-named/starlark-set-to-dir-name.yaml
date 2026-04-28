@@ -15,17 +15,9 @@ source: |-
     return {}
 
   def get_package_name(root_kptfile_path, resource_path, resource_name):
-    print("******")
-
     full_resource_path = resource_path + "/" + resource_name
-    print("full resource path : " + full_resource_path)
-    print("******")
-
     relative_resource_path = full_resource_path.removeprefix(root_kptfile_path + "/")
     package_name = relative_resource_path.rpartition("/")[0].replace("/", "-slash-").lower()
-    print("package name : " + package_name)
-    print("******")
-
     return package_name
 
   def set_package_name(resources, root_kptfile_path):
