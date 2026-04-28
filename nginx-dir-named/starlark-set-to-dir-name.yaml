@@ -8,23 +8,32 @@ metadata:
 source: |-
   load("krmfn.star", "krmfn")
 
-  def get_package_dir(resources):
+  def get_root_kptfile_path(resources):
     for r in resources:
       if krmfn.match_gvk(r, "kpt.dev/v1", "Kptfile"):
-        if not "internal.kpt.dev/render-root-path" in r["metadata"]["annotations"]:
-          render_root_path = r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"]
-          r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"] = render_root_path
-          print ("render_root_path=" + render_root_path)
-          return render_root_path.rpartition("/")[2].lower()
-        else:
-          render_root_path = r["metadata"]["annotations"]["internal.kpt.dev/render-root-path"]
-          print ("render_root_path=" + render_root_path)
-          return r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"].rpartition(render_root_path + "/")[2].replace("/", "-").lower()
-    
+        return r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"].rpartition("/")[0]
     return {}
 
-  def set_package_name(resources, package_name):
+  def get_package_name(root_kptfile_path, resource_path, resource_name):
+    print("******")
+
+    full_resource_path = resource_path + "/" + resource_name
+    print("full resource path : " + full_resource_path)
+    print("******")
+
+    relative_resource_path = full_resource_path.removeprefix(root_kptfile_path + "/")
+    package_name = relative_resource_path.rpartition("/")[0].replace("/", "-slash-").lower()
+    print("package name : " + package_name)
+    print("******")
+
+    return package_name
+
+  def set_package_name(resources, root_kptfile_path):
     for r in resources:
+      resource_path = r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"]
+      resource_name = r["metadata"]["annotations"]["config.kubernetes.io/path"]
+      package_name = get_package_name(root_kptfile_path, resource_path, resource_name)
+
       if krmfn.match_gvk(r, "apps/v1", "Deployment") or krmfn.match_gvk(r, "v1", "Service"):
         r["metadata"]["name"] = package_name
 
@@ -35,17 +44,6 @@ source: |-
       if krmfn.match_gvk(r, "v1", "ConfigMap") and krmfn.match_name(r, "kptfile.kpt.dev"):
         r["data"]["name"] = package_name
 
-  def clear_internal_annotations(resources):
-    for r in resources:
-      if "internal.kpt.dev/render-root-path" in r["metadata"]["annotations"]:
-        r["metadata"]["annotations"].pop("internal.kpt.dev/render-root-path")
+  root_kptfile_path = get_root_kptfile_path(ctx.resource_list["items"])
 
-  package_dir = get_package_dir(ctx.resource_list["items"])
-
-  print("setting package name to " + package_dir)
-
-  set_package_name(ctx.resource_list["items"], package_dir)
-
-  print("package name has been set to " + package_dir)
-
-  clear_internal_annotations(ctx.resource_list["items"])
+  set_package_name(ctx.resource_list["items"], root_kptfile_path)
