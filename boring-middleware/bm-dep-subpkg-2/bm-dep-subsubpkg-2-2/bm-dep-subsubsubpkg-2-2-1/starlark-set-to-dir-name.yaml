@@ -11,20 +11,28 @@ source: |-
   def get_root_kptfile_path(resources):
     for r in resources:
       if krmfn.match_gvk(r, "kpt.dev/v1", "Kptfile"):
-        return r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"].rpartition("/")[0]
+        return r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"]
     return {}
 
-  def get_package_name(root_kptfile_path, resource_path, resource_name):
+  def get_root_package_name(resources):
+    for r in resources:
+      if krmfn.match_gvk(r, "v1", "ConfigMap") and krmfn.match_name(r, "kptfile.kpt.dev"):
+        return r["data"]["name"]
+
+  def get_package_name(root_kptfile_path, root_package_name, resource_path, resource_name):
     full_resource_path = resource_path + "/" + resource_name
     relative_resource_path = full_resource_path.removeprefix(root_kptfile_path + "/")
-    package_name = relative_resource_path.rpartition("/")[0].replace("/", "-slash-").lower()
+    package_resource_path = root_package_name + "/" + relative_resource_path
+    package_resource_path = package_resource_path.replace("//", "/")
+
+    package_name = package_resource_path.rpartition("/")[0].replace("/", "-d-").lower()
     return package_name
 
-  def set_package_name(resources, root_kptfile_path):
+  def set_package_name(resources, root_kptfile_path, root_package_name):
     for r in resources:
       resource_path = r["metadata"]["annotations"]["internal.config.kubernetes.io/package-path"]
       resource_name = r["metadata"]["annotations"]["config.kubernetes.io/path"]
-      package_name = get_package_name(root_kptfile_path, resource_path, resource_name)
+      package_name = get_package_name(root_kptfile_path, root_package_name, resource_path, resource_name)
 
       if krmfn.match_gvk(r, "apps/v1", "Deployment") or krmfn.match_gvk(r, "v1", "Service"):
         r["metadata"]["name"] = package_name
@@ -37,5 +45,6 @@ source: |-
         r["data"]["name"] = package_name
 
   root_kptfile_path = get_root_kptfile_path(ctx.resource_list["items"])
+  root_package_name = get_root_package_name(ctx.resource_list["items"])
 
-  set_package_name(ctx.resource_list["items"], root_kptfile_path)
+  set_package_name(ctx.resource_list["items"], root_kptfile_path, root_package_name)

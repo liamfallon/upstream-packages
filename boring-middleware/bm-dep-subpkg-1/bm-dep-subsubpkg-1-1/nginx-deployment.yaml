@@ -14,7 +14,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: /nginx-dir-named
-  name: boring-middleware-slash-bm-dep-subpkg-1-slash-bm-dep-subsubpkg-1-1
+  name: boring-middleware-d-bm-dep-subpkg-1-d-bm-dep-subsubpkg-1-1
   annotations:
     internal.kpt.dev/upstream-identifier: apps|Deployment|default|nginx-dir-named
 spec:

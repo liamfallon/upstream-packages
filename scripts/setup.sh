@@ -22,6 +22,7 @@ rm boring-middleware/bm-subdir-b/package-context.yaml
 rm boring-middleware/bm-subdir-b/starlark-set-to-dir-name.yaml
 
 yq -i 'del(.upstream, .upstreamLock, .status)' boring-middleware/Kptfile
+yq -i '.data.name = "boring-middleware"' boring-middleware/package-context.yaml
 
 kpt fn render boring-middleware
 
@@ -50,6 +51,7 @@ rm wonderful-feature/wf-subdir-b/package-context.yaml
 rm wonderful-feature/wf-subdir-b/starlark-set-to-dir-name.yaml
 
 yq -i 'del(.upstream, .upstreamLock, .status)' wonderful-feature/Kptfile
+yq -i '.data.name = "wonderful-feature"' wonderful-feature/package-context.yaml
 
 kpt fn render wonderful-feature
 
