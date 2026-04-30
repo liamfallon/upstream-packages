@@ -8,5 +8,5 @@ info:
   description: This is a nginx deployment for nginx-dir-named
 pipeline:
   mutators:
-    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
       configPath: starlark-set-to-dir-name.yaml
