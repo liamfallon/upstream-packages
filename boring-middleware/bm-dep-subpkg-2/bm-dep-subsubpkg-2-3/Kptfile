@@ -17,10 +17,10 @@ upstreamLock:
     repo: https://github.com/liamfallon/upstream-packages
     directory: /nginx-dir-named
     ref: nginx-dir-v1
-    commit: 2d5629e34d874d286bec6bf2afec52cac20a75a1
+    commit: 7eb096a25262aed55a270a4e3fa919750fd6413a
 info:
   description: This is a nginx deployment for boring-middleware-d-bm-dep-subpkg-2-d-bm-dep-subsubpkg-2-3
 pipeline:
   mutators:
-    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
       configPath: starlark-set-to-dir-name.yaml

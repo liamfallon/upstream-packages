@@ -8,7 +8,7 @@ info:
   description: This is a nginx deployment for boring-middleware
 pipeline:
   mutators:
-    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
       configPath: starlark-set-to-dir-name.yaml
 status:
   conditions:
@@ -17,21 +17,21 @@ status:
       reason: RenderSuccess
   renderStatus:
     mutationSteps:
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
         exitCode: 0
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
         exitCode: 0
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
         exitCode: 0
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
         exitCode: 0
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
         exitCode: 0
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
         exitCode: 0
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
         exitCode: 0
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
         exitCode: 0
-      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:latest
+      - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.5.5
         exitCode: 0
