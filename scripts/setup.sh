@@ -16,13 +16,16 @@ kpt pkg get https://github.com/liamfallon/upstream-packages/nginx-dir-named@ngin
 
 rm boring-middleware/bm-subdir-a/Kptfile
 rm boring-middleware/bm-subdir-a/package-context.yaml
+rm boring-middleware/bm-subdir-a/package-options.yaml
 rm boring-middleware/bm-subdir-a/starlark-set-to-dir-name.yaml
 rm boring-middleware/bm-subdir-b/Kptfile
 rm boring-middleware/bm-subdir-b/package-context.yaml
+rm boring-middleware/bm-subdir-b/package-options.yaml
 rm boring-middleware/bm-subdir-b/starlark-set-to-dir-name.yaml
 
 yq -i 'del(.upstream, .upstreamLock, .status)' boring-middleware/Kptfile
 yq -i '.data.name = "boring-middleware"' boring-middleware/package-context.yaml
+yq -i '.data.name = "boring-middleware"' boring-middleware/package-options.yaml
 
 kpt fn render boring-middleware
 
@@ -45,13 +48,16 @@ kpt pkg get https://github.com/liamfallon/upstream-packages/nginx-dir-named@ngin
 
 rm wonderful-feature/wf-subdir-a/Kptfile
 rm wonderful-feature/wf-subdir-a/package-context.yaml
+rm wonderful-feature/wf-subdir-a/package-options.yaml
 rm wonderful-feature/wf-subdir-a/starlark-set-to-dir-name.yaml
 rm wonderful-feature/wf-subdir-b/Kptfile
-rm wonderful-feature/wf-subdir-b/package-context.yaml
+rm wonderful-feature/wf-subdir-a/package-context.yaml
+rm wonderful-feature/wf-subdir-a/package-options.yaml
 rm wonderful-feature/wf-subdir-b/starlark-set-to-dir-name.yaml
 
 yq -i 'del(.upstream, .upstreamLock, .status)' wonderful-feature/Kptfile
 yq -i '.data.name = "wonderful-feature"' wonderful-feature/package-context.yaml
+yq -i '.data.name = "wonderful-feature"' wonderful-feature/package-options.yaml
 
 kpt fn render wonderful-feature
 

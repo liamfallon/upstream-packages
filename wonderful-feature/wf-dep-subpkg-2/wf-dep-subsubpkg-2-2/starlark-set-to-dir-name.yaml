@@ -16,7 +16,7 @@ source: |-
 
   def get_root_package_name(resources):
     for r in resources:
-      if krmfn.match_gvk(r, "v1", "ConfigMap") and krmfn.match_name(r, "kptfile.kpt.dev"):
+      if krmfn.match_gvk(r, "v1", "ConfigMap") and krmfn.match_name(r, "package-options"):
         return r["data"]["name"]
 
   def get_package_name(root_kptfile_path, root_package_name, resource_path, resource_name):
@@ -41,7 +41,7 @@ source: |-
         r["metadata"]["name"] = package_name
         r["info"]["description"] = "This is a nginx deployment for " + package_name
 
-      if krmfn.match_gvk(r, "v1", "ConfigMap") and krmfn.match_name(r, "kptfile.kpt.dev"):
+      if krmfn.match_gvk(r, "v1", "ConfigMap") and (krmfn.match_name(r, "kptfile.kpt.dev") or krmfn.match_name(r, "package-options")):
         r["data"]["name"] = package_name
 
   root_kptfile_path = get_root_kptfile_path(ctx.resource_list["items"])

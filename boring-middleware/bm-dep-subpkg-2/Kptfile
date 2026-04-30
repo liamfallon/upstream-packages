@@ -17,7 +17,7 @@ upstreamLock:
     repo: https://github.com/liamfallon/upstream-packages
     directory: /nginx-dir-named
     ref: nginx-dir-v1
-    commit: 7eb096a25262aed55a270a4e3fa919750fd6413a
+    commit: f2b1f8da945bc22f780a15ce00eb7d75a141e0ae
 info:
   description: This is a nginx deployment for boring-middleware-d-bm-dep-subpkg-2
 pipeline:
